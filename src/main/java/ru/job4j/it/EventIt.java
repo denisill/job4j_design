@@ -24,14 +24,8 @@ public class EventIt implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        if (point >= numbers.length) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
-        }
-        while (point < numbers.length) {
-            if (numbers[point] % 2 == 0) {
-                break;
-            }
-            point++;
         }
         return numbers[point++];
     }
