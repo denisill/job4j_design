@@ -18,12 +18,18 @@ public class Generics {
         gen.printObject(third);
         System.out.println();
 
+        /**
+         * строка gen.printBoundedWildCard(first) закомментирована, так как вызвает ошибку компиляции
+         */
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
 
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
+        /**
+         * строка gen.printLowerBoundedWildCard(third) закомментирована, так как вызвает ошибку компиляции
+         */
     }
 
     public void printObject(List<?> list) {
