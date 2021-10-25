@@ -15,22 +15,28 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (size == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
+            growArrays();
         }
         container[size++] = value;
         modCount++;
     }
 
+    public void growArrays() {
+        container = Arrays.copyOf(container, container.length * 2);
+    }
+
     @Override
     public T set(int index, T newValue) {
-        T setValue = container[Objects.checkIndex(index, container.length)];
+        Objects.checkIndex(index, size);
+        T setValue = container[index];
         container[index] = newValue;
         return setValue;
     }
 
     @Override
     public T remove(int index) {
-        T removeValue = container[Objects.checkIndex(index, container.length)];
+        Objects.checkIndex(index, size);
+        T removeValue = container[index];
         System.arraycopy(container, index + 1, container, index, container.length - 1 - index);
         container[container.length - 1] = null;
         size--;
@@ -40,7 +46,8 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        return  container[Objects.checkIndex(index, container.length)];
+        Objects.checkIndex(index, size);
+        return container[index];
     }
 
     @Override
