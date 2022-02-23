@@ -46,6 +46,9 @@ public class SimpleLinkedList<E> implements List<E> {
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return element != null;
             }
 
@@ -54,14 +57,8 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-
                 E rsl = element.currentElement;
                 element = element.next;
-
                 return rsl;
             }
         };
